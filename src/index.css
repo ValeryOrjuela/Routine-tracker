@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #FAF7F2;
+  --warm: #F2EBE0;
+  --bark: #C4A882;
+  --earth: #8B6F47;
+  --deep: #3D2B1F;
+  --sage: #7A9E7E;
+  --sage-light: #B8D4BB;
+  --blush: #E8A598;
+  --gold: #D4A853;
+  --gold-light: #F5DFA0;
+  --sky: #8BB8D4;
+  --lavender: #B8A8D4;
+  --text: #2C1F14;
+  --muted: #9B8878;
+  --border: #DDD0C0;
+  --shadow: rgba(61,43,31,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* Scrollbar hide */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: flex-end;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-sheet {
+  background: var(--cream);
+  width: 100%; max-height: 90vh;
+  border-radius: 24px 24px 0 0;
+  padding: 24px;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.34,1.1,0.64,1);
+}
+.modal-overlay.open .modal-sheet { transform: translateY(0); }
+.modal-handle {
+  width: 40px; height: 4px;
+  background: var(--border); border-radius: 10px;
+  margin: 0 auto 20px;
+}
+
+/* Fields */
+.field-label {
+  font-size: 11px; text-transform: uppercase;
+  letter-spacing: 1.2px; color: var(--muted);
+  font-weight: 500; margin-bottom: 6px; display: block;
+}
+.field-input {
+  width: 100%; padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px; font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  background: white; color: var(--text);
+  outline: none; margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.field-input:focus { border-color: var(--bark); }
+
+/* Pills */
+.pill {
+  padding: 7px 14px; border-radius: 20px;
+  border: 1.5px solid var(--border);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  background: white;
+}
+.pill.selected { background: var(--deep); color: var(--gold); border-color: var(--deep); }
+
+/* Buttons */
+.btn-primary {
+  width: 100%; padding: 15px;
+  background: var(--deep); color: var(--cream);
+  border: none; border-radius: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  cursor: pointer; margin-top: 8px;
+  transition: opacity 0.2s;
+}
+.btn-primary:active { opacity: 0.8; }
+.btn-danger {
+  width: 100%; padding: 12px;
+  background: transparent; color: #C0392B;
+  border: 1.5px solid #E8B4B0; border-radius: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; margin-top: 8px;
+}
+
+/* Day toggles */
+.day-toggle {
+  aspect-ratio: 1; border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: white; font-size: 11px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: center; transition: all 0.15s; color: var(--muted);
+}
+.day-toggle.selected { background: var(--deep); color: var(--gold); border-color: var(--deep); }
+
+/* Emoji picker */
+.emoji-opt {
+  font-size: 22px; cursor: pointer; padding: 6px;
+  border-radius: 10px; border: 2px solid transparent;
+  transition: all 0.15s;
+}
+.emoji-opt.selected { border-color: var(--bark); background: var(--warm); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--deep); color: var(--cream);
+  padding: 10px 20px; border-radius: 30px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0; transition: all 0.3s; z-index: 300;
+  pointer-events: none; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Celebration */
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.celebration-card { animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
